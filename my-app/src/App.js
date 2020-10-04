@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./styles.css";
 
-function App() {
+addEventListener("keyup", function (event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("myBtn").click();
+  }
+});
+
+export default function App() {
+  //
+  var [myInput, changeInput] = useState("lol");
+
+  function message() {
+    changeInput(document.getElementById("fname").value);
+    var holder = document.getElementById("holder");
+    // have this function to read a value and display
+    holder.innerHTML +=
+      "<li>" + document.getElementById("fname").value + "</li><br>";
+
+    document.getElementById("fname").value = "";
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <html>
+      <body>
+        <p>Please Input a String: </p>
+        <input type="text" id="fname" name="fname"></input>
+        <br />
+
+        <button id="myBtn" onClick={message}>
+          +
+        </button>
+
+        <div id="holder"></div>
+      </body>
+    </html>
   );
 }
-
-export default App;
